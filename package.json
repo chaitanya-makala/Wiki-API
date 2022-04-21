@@ -4,5 +4,28 @@
     "ejs": "^3.1.7",
     "express": "^4.17.3",
     "mongoose": "^6.3.0"
-  }
+  },
+  "name": "wiki-api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaitanya-makala/Wiki-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "npm": ">=8.5.0",
+    "node": ">=16.14.2"
+  },
+  "bugs": {
+    "url": "https://github.com/chaitanya-makala/Wiki-API/issues"
+  },
+  "homepage": "https://github.com/chaitanya-makala/Wiki-API#readme",
+  "description": ""
 }
