@@ -18,6 +18,30 @@ const articleSchema = new Schema({
 
 const Article = mongoose.model("Article", articleSchema);
 
+app.get("/articles", (req, res) => {
+  Article.find({}, (err, result) => {
+    if (!err) {
+      res.send(result);
+    } else {
+      res.send(err);
+    }
+  });
+});
+
+app.post("/articles", (req, res) => {
+  const article = new Article({
+    title: req.body.title,
+    content: req.body.content,
+  });
+  article.save((err) => {
+    if (!err) {
+      res.send("Successfully added a new article.");
+    } else {
+      res.send(err);
+    }
+  });
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Listening on port 3000");
 });
