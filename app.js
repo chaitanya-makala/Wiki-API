@@ -18,6 +18,8 @@ const articleSchema = new Schema({
 
 const Article = mongoose.model("Article", articleSchema);
 
+// Request Targetting All Articles
+
 app
   .route("/articles")
   .get((req, res) => {
@@ -46,6 +48,59 @@ app
     Article.deleteMany({}, (err) => {
       if (!err) {
         res.send("Deleted all articles.");
+      } else {
+        res.send(err);
+      }
+    });
+  });
+
+// Requests Targetting A Specific Article
+
+app
+  .route("/articles/:articleTitle")
+  .get((req, res) => {
+    Article.findOne({ title: req.params.articleTitle }, (err, result) => {
+      if (result) {
+        res.send(result);
+      } else {
+        res.send("No Articles Matching The Title Found");
+      }
+      if (err) {
+        res.send(err);
+      }
+    });
+  })
+  .put((req, res) => {
+    Article.findOneAndUpdate(
+      { title: req.params.articleTitle },
+      { title: req.body.title, content: req.body.content },
+      { overwrite: true },
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send("Successfully updated article");
+        }
+      }
+    );
+  })
+  .patch((req, res) => {
+    Article.findOneAndUpdate(
+      { title: req.params.articleTitle },
+      { $set: req.body },
+      (err) => {
+        if (!err) {
+          res.send("successfully patched the data");
+        } else {
+          res.send(err);
+        }
+      }
+    );
+  })
+  .delete((req, res) => {
+    Article.findOneAndDelete({ title: req.params.articleTitle }, (err) => {
+      if (!err) {
+        res.send("Successfully deleted the article");
       } else {
         res.send(err);
       }
